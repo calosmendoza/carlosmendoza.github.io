@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Factoriales</title>
+    <style>
+        @keyframes cambio {
+            0% { border-color: #007bff; }
+            25% { border-color: #28a745; }
+            50% { border-color: #ffc107; }
+            75% { border-color: #dc3545; }
+            100% { border-color: #007bff; }
+        }
+
+        body {
+            font-family: 'Roboto', Arial;
+           /* background-image: url(img3.png);*/
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            border: 4px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgba(163, 162, 162, 0.856);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: cambio 15s infinite;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        legend {
+            font-weight: bold;
+            color: #007bff;
+        }
+        #res {
+            color: #333;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container" style="background-color: #c09f0d;">
+        <h1 style="text-align: center  ;color: #8e4ce4;">FACTURA</h1>  
+        
+        
+            <div class="header" style="text-align: right; ">
+                <div >
+                    <label for="fecha">NOTA DE VENTA</label><br>
+                    <input type="text" id="cliente" name="cliente" style="width: 10%;"><br>
+                    <label for="cliente">FECHA:</label><br>
+                    <input type="date" id="fecha" name="fecha"><br>
+                </div>
+            </div>
+            <br>
+        <div class="container " style="background-color: rgb(204, 201, 248);">
+            <div class="header">
+            <div class="client-info">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente" style="width: 80%;"><br><br>
+                <label for="telefono">Tel:</label>
+                <input type="tel" id="telefono" name="telefono" style="width: 45%;"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" style="width: 45%;"><br><br>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" style="width: 80%;">
+            </div>
+         </div>
+        </div>
+               <div class="card"> <br>
+          
+          <div class="container" style="background-color: rgb(204, 201, 248);">
+            <div class="header">
+          <div class="card-body">
+           <table  style="color: #8e4ce4;"  class="table table-bordered" width="100%">
+           <tr>
+        <th width="10%">CANT</th>
+        <th width="55%">DETALLES</th>
+        <th width="15%">P.U.</th>
+        <th width="15%">SUBTOTAL</th>
+      </tr>
+      <tr>
+        <td><input type="number" class="form-control" id="cant1" onkeyup="calcular()" value="0"></td>
+        <td>
+           <select name="det1" id="det1" class="form-control" onchange="mostrar1()">
+            <option>Seleccione su Producto...</option>
+            <option value="P01">LOGITECH G502 Hero</option>
+            <option value="P02">LOGITECH G435 Audifono</option>
+            <option value="P03">LOGITECH G502 Inalambrico</option>
+            <option value="P04">LOGITECH Blue Yeti X Microfono</option>
+            <option value="P05">LOGITECH C922 HD Pro Camara</option>
+          </select>
+          <div id="desc1"></div>
+           </td>
+         <td><input type="number" class="form-control" id="pu1" onkeyup="calcular()" value="0"></td>
+           <td><input type="number" class="form-control" id="subt1" value="0"></td>
+          </tr>
+          <tr>
+         <td><input type="number" class="form-control" id="cant2" onkeyup="calcular()" value="0"></td>
+         <td>
+          <select name="det2" id="det2" class="form-control" onchange="mostrar2()">
+            <option>Seleccione su Producto...</option>
+            <option value="P01">LOGITECH G502 Hero</option>
+            <option value="P02">LOGITECH G435 Audifono</option>
+            <option value="P03">LOGITECH G502 Inalambrico</option>
+            <option value="P04">LOGITECH Blue Yeti X Microfono</option>
+            <option value="P05">LOGITECH C922 HD Pro Camara</option>
+          </select>
+          <div id="desc2"></div>
+        </td>
+        <td><input type="number" class="form-control" id="pu2" onkeyup="calcular()" value="0"></td>
+        <td><input type="number" class="form-control" id="subt2" value="0"></td>
+      </tr>
+      <tr>
+        <td><input type="number" class="form-control" id="cant3" onkeyup="calcular()" value="0"></td>
+        <td>
+          <select name="det3" id="det3" class="form-control" onchange="mostrar3()">
+            <option>Seleccione su Producto...</option>
+            <option value="P01">LOGITECH G502 Hero</option>
+            <option value="P02">LOGITECH G435 Audifono</option>
+            <option value="P03">LOGITECH G502 Inalambrico</option>
+            <option value="P04">LOGITECH Blue Yeti X Microfono</option>
+            <option value="P05">LOGITECH C922 HD Pro Camara</option>
+          </select>
+          <div id="desc3"></div>
+        </td>
+        <td><input type="number" class="form-control" id="pu3" onkeyup="calcular()" value="0"></td>
+        <td><input type="number" class="form-control" id="subt3" value="0"></td>
+      </tr>
+      
+
+      <tr>
+        <td><input type="number" class="form-control" id="cant4" onkeyup="calcular()" value="0"></td>
+        <td>
+           <select name="det4" id="det4" class="form-control" onchange="mostrar4()">
+            <option>Seleccione su Producto...</option>
+            <option value="P01">LOGITECH G502 Hero</option>
+            <option value="P02">LOGITECH G435 Audifono</option>
+            <option value="P03">LOGITECH G502 Inalambrico</option>
+            <option value="P04">LOGITECH Blue Yeti X Microfono</option>
+            <option value="P05">LOGITECH C922 HD Pro Camara</option>
+          </select>
+          <div id="desc4"></div>
+           </td>
+         <td><input type="number" class="form-control" id="pu4" onkeyup="calcular()" value="0"></td>
+           <td><input type="number" class="form-control" id="subt4" value="0"></td>
+          </tr>
+         
+
+          <tr>
+            <td><input type="number" class="form-control" id="cant5" onkeyup="calcular()" value="0"></td>
+            <td>
+               <select name="det5" id="det5" class="form-contro5" onchange="mostrar5()">
+                <option>Seleccione su Producto...</option>
+            <option value="P01">LOGITECH G502 Hero</option>
+            <option value="P02">LOGITECH G435 Audifono</option>
+            <option value="P03">LOGITECH G502 Inalambrico</option>
+            <option value="P04">LOGITECH Blue Yeti X Microfono</option>
+            <option value="P05">LOGITECH C922 HD Pro Camara</option>
+              </select>
+              <div id="desc5"></div>
+               </td>
+             <td><input type="number" class="form-control" id="pu5" onkeyup="calcular()" value="0"></td>
+               <td><input type="number" class="form-control" id="subt5" value="0"></td>
+              </tr>
+      
+
+      <tr class="active" style="background-color: rgb(190, 202, 190);">
+        <th colspan="3" class="text-right">IVA:</th>
+        <th><input type="number" class="form-control" id="iva"></th>
+      </tr>
+      <tr class="active" style="background-color: rgb(190, 202, 190);">
+        <th colspan="3" class="text-right">TOTAL:</th>
+        <th><input type="number" class="form-control" id="total"></th>
+      </tr>
+     </table>
+          
+     </div>
+     </body>
+    
+     </html>
+     <script>
+        function calcular() {
+    var cant1 = parseInt(document.getElementById("cant1").value) || 0;
+    var pu1 = parseFloat(document.getElementById("pu1").value) || 0;
+    var subt1 = pu1 * cant1;
+    document.getElementById("subt1").value = subt1;
+
+    var cant2 = parseInt(document.getElementById("cant2").value) || 0;
+    var pu2 = parseFloat(document.getElementById("pu2").value) || 0;
+    var subt2 = pu2 * cant2;
+    document.getElementById("subt2").value = subt2;
+
+    var cant3 = parseInt(document.getElementById("cant3").value) || 0;
+    var pu3 = parseFloat(document.getElementById("pu3").value) || 0;
+    var subt3 = pu3 * cant3;
+    document.getElementById("subt3").value = subt3;
+
+    var cant4 = parseInt(document.getElementById("cant4").value) || 0;
+    var pu4 = parseFloat(document.getElementById("pu4").value) || 0;
+    var subt4 = pu4 * cant4;
+    document.getElementById("subt4").value = subt4;
+
+    var cant5 = parseInt(document.getElementById("cant5").value) || 0;
+    var pu5 = parseFloat(document.getElementById("pu5").value) || 0;
+    var subt5 = pu5 * cant5;
+    document.getElementById("subt5").value = subt5;
+
+
+    // Calculate the total subtotal
+    var subtotal = subt1 + subt2 + subt3 + subt4 + subt5;
+
+    // Calculate IVA (13% of the subtotal)
+    var iva = subtotal * 0.13;
+    document.getElementById("iva").value = iva.toFixed(2);
+
+    // Calculate the total including IVA
+    var total = subtotal + iva;
+    document.getElementById("total").value = total.toFixed(2);
+}
+
+      function mostrar1() {
+        indice = document.getElementById("det1").selectedIndex;
+        switch (indice) {
+          case 1:
+              detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause1.jpg" width="120px"></td><td>Mause Color:Black Con cable USB</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                          
+                         
+                        "</table>";
+            break;
+          case 2:
+          detalles = "<table>"+
+                          '<tr><td rowspan="4"><img src="img/aud2.jpg" width="120px"></td><td>Manufacturer Color: NEGRO</td></tr>'+
+                          "<tr><td>Conexión inalámbrica para máxima movilidad</td></tr>"+
+                          "<tr><td>Sonido envolvente para una experiencia inmersiva.</td></tr>"+
+                          "<tr><td>Batería de larga duración para sesiones extensas.</td></tr>"+
+                          
+                        "</table>";
+            break;        
+          case 3:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause3.jpg" width="120px"></td><td>Manufacturer Color:NEGRO Conexión inalámbrica</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                        "</table>";
+            break;
+
+            case 4:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/micro4.jpg" width="120px"></td><td>Manufacturer Color: NEGRO </td></tr>'+
+                          "<tr><td>TIPO:Vocal, Musica,Podcat,Gamer </td></tr>"+
+                          "<tr><td>Transductor:4 cápsulas de condensador de 14mm con patente Blue </td></tr>"+
+                        "</table>";
+            break;
+            case 5:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/cam5.jpg" width="120px"></td><td>Manufacturer Color: NEGRO USB</td></tr>'+
+                          "<tr><td>Resolución máxima: 1080p/30 fps - 720p/60 fps</td></tr>"+
+                          "<tr><td>Micrófono integrado: estéreo</td></tr>"+
+                        "</table>";
+            break;
+
+
+
+          default:
+          detalles = "error";
+        }
+        document.getElementById("desc1").innerHTML=detalles;
+      }
+      function mostrar2() {
+        indice = document.getElementById("det2").selectedIndex;
+        switch (indice) {
+          case 1:
+              detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause1.jpg" width="120px"></td><td>Mause Color:Black Con cable USB</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                          
+                         
+                        "</table>";
+            break;
+          case 2:
+          detalles = "<table>"+
+                          '<tr><td rowspan="4"><img src="img/aud2.jpg" width="120px"></td><td>Manufacturer Color: NEGRO</td></tr>'+
+                          "<tr><td>Conexión inalámbrica para máxima movilidad</td></tr>"+
+                          "<tr><td>Sonido envolvente para una experiencia inmersiva.</td></tr>"+
+                          "<tr><td>Batería de larga duración para sesiones extensas.</td></tr>"+
+                          
+                        "</table>";
+            break;        
+          case 3:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause3.jpg" width="120px"></td><td>Manufacturer Color:NEGRO Conexión inalámbrica</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                        "</table>";
+            break;
+
+            case 4:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/micro4.jpg" width="120px"></td><td>Manufacturer Color: NEGRO </td></tr>'+
+                          "<tr><td>TIPO:Vocal, Musica,Podcat,Gamer </td></tr>"+
+                          "<tr><td>Transductor:4 cápsulas de condensador de 14mm con patente Blue </td></tr>"+
+                        "</table>";
+            break;
+            case 5:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/cam5.jpg" width="120px"></td><td>Manufacturer Color: NEGRO USB</td></tr>'+
+                          "<tr><td>Resolución máxima: 1080p/30 fps - 720p/60 fps</td></tr>"+
+                          "<tr><td>Micrófono integrado: estéreo</td></tr>"+
+                        "</table>";
+            break;
+
+
+          default:
+          detalles = "error";
+        }
+        document.getElementById("desc2").innerHTML=detalles;
+      }
+      function mostrar3() {
+        indice = document.getElementById("det3").selectedIndex;
+        switch (indice) {
+          case 1:
+              detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause1.jpg" width="120px"></td><td>Mause Color:Black Con cable USB</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                          
+                         
+                        "</table>";
+            break;
+          case 2:
+          detalles = "<table>"+
+                          '<tr><td rowspan="4"><img src="img/aud2.jpg" width="120px"></td><td>Manufacturer Color: NEGRO</td></tr>'+
+                          "<tr><td>Conexión inalámbrica para máxima movilidad</td></tr>"+
+                          "<tr><td>Sonido envolvente para una experiencia inmersiva.</td></tr>"+
+                          "<tr><td>Batería de larga duración para sesiones extensas.</td></tr>"+
+                          
+                        "</table>";
+            break;        
+          case 3:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause3.jpg" width="120px"></td><td>Manufacturer Color:NEGRO Conexión inalámbrica</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                        "</table>";
+            break;
+
+            case 4:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/micro4.jpg" width="120px"></td><td>Manufacturer Color: NEGRO </td></tr>'+
+                          "<tr><td>TIPO:Vocal, Musica,Podcat,Gamer </td></tr>"+
+                          "<tr><td>Transductor:4 cápsulas de condensador de 14mm con patente Blue </td></tr>"+
+                        "</table>";
+            break;
+            case 5:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/cam5.jpg" width="120px"></td><td>Manufacturer Color: NEGRO USB</td></tr>'+
+                          "<tr><td>Resolución máxima: 1080p/30 fps - 720p/60 fps</td></tr>"+
+                          "<tr><td>Micrófono integrado: estéreo</td></tr>"+
+                        "</table>";
+            break;
+
+
+          default:
+          detalles = "error";
+        }
+        
+        document.getElementById("desc3").innerHTML=detalles;
+      }
+      function mostrar4() {
+        indice = document.getElementById("det4").selectedIndex;
+        switch (indice) {
+          case 1:
+              detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause1.jpg" width="120px"></td><td>Mause Color:Black Con cable USB</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                          
+                         
+                        "</table>";
+            break;
+          case 2:
+          detalles = "<table>"+
+                          '<tr><td rowspan="4"><img src="img/aud2.jpg" width="120px"></td><td>Manufacturer Color: NEGRO</td></tr>'+
+                          "<tr><td>Conexión inalámbrica para máxima movilidad</td></tr>"+
+                          "<tr><td>Sonido envolvente para una experiencia inmersiva.</td></tr>"+
+                          "<tr><td>Batería de larga duración para sesiones extensas.</td></tr>"+
+                          
+                        "</table>";
+            break;        
+          case 3:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause3.jpg" width="120px"></td><td>Manufacturer Color:NEGRO Conexión inalámbrica</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                        "</table>";
+            break;
+
+            case 4:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/micro4.jpg" width="120px"></td><td>Manufacturer Color: NEGRO </td></tr>'+
+                          "<tr><td>TIPO:Vocal, Musica,Podcat,Gamer </td></tr>"+
+                          "<tr><td>Transductor:4 cápsulas de condensador de 14mm con patente Blue </td></tr>"+
+                        "</table>";
+            break;
+            case 5:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/cam5.jpg" width="120px"></td><td>Manufacturer Color: NEGRO USB</td></tr>'+
+                          "<tr><td>Resolución máxima: 1080p/30 fps - 720p/60 fps</td></tr>"+
+                          "<tr><td>Micrófono integrado: estéreo</td></tr>"+
+                        "</table>";
+            break;
+
+            
+
+
+          default:
+          detalles = "error";
+        }
+        document.getElementById("desc4").innerHTML=detalles;
+      }
+      function mostrar5() {
+        indice = document.getElementById("det5").selectedIndex;
+        switch (indice) {
+          case 1:
+              detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause1.jpg" width="120px"></td><td>Mause Color:Black Con cable USB</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                          
+                         
+                        "</table>";
+            break;
+          case 2:
+          detalles = "<table>"+
+                          '<tr><td rowspan="4"><img src="img/aud2.jpg" width="120px"></td><td>Manufacturer Color: NEGRO</td></tr>'+
+                          "<tr><td>Conexión inalámbrica para máxima movilidad</td></tr>"+
+                          "<tr><td>Sonido envolvente para una experiencia inmersiva.</td></tr>"+
+                          "<tr><td>Batería de larga duración para sesiones extensas.</td></tr>"+
+                          
+                        "</table>";
+            break;        
+          case 3:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/mause3.jpg" width="120px"></td><td>Manufacturer Color:NEGRO Conexión inalámbrica</td></tr>'+
+                          "<tr><td>Sensor HERO DPI: 100-25.600</td></tr>"+
+                          "<tr><td>Velocidad de respuesta USB: 1000 Hz (1 ms)</td></tr>"+
+                        "</table>";
+            break;
+
+            case 4:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/micro4.jpg" width="120px"></td><td>Manufacturer Color: NEGRO </td></tr>'+
+                          "<tr><td>TIPO:Vocal, Musica,Podcat,Gamer </td></tr>"+
+                          "<tr><td>Transductor:4 cápsulas de condensador de 14mm con patente Blue </td></tr>"+
+                        "</table>";
+            break;
+            case 5:
+          detalles = "<table>"+
+                          '<tr><td rowspan="3"><img src="img/cam5.jpg" width="120px"></td><td>Manufacturer Color: NEGRO USB</td></tr>'+
+                          "<tr><td>Resolución máxima: 1080p/30 fps - 720p/60 fps</td></tr>"+
+                          "<tr><td>Micrófono integrado: estéreo</td></tr>"+
+                        "</table>";
+            break;
+
+
+            
+
+
+          default:
+          detalles = "error";
+        }
+        document.getElementById("desc5").innerHTML=detalles;
+      }
+
+
+      </script> 
+
+</div>
+</div>
+</body>
+</html>
